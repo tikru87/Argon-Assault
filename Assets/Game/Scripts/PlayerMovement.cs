@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerShip : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
+	[Header("General")]
 	[Tooltip("In ms^-1")][SerializeField] float Speed = 10f;
-	[Space(10)]
+	[Header("Screen-position Based")]
 	[SerializeField] float positionPitchFactor = -12f;
-	[SerializeField] float controlPitchfactor = -15f;
-	[Space(10)]
 	[SerializeField] float positionYawfactor = 12f;
+	[Header("Control-throw Based")]
+	[SerializeField] float controlPitchfactor = -15f;
 	[SerializeField] float controlYawfactor = 15f;
-	[Space(10)]
 	[SerializeField] float controlRollfactor = 15f;
 
 
 	float xThrow, yThrow;
+	bool isDead = false;
 
 	// Use this for initialization
 	void Start () {
@@ -24,9 +25,12 @@ public class PlayerShip : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		HandleTranslation ();
-		HandleRotation();
+	void Update ()
+	{
+		if (!isDead) {
+			HandleTranslation ();
+			HandleRotation ();
+		}
 	}
 
 	void HandleRotation ()
@@ -45,5 +49,11 @@ public class PlayerShip : MonoBehaviour {
 		float yOffset = yThrow * Speed * Time.deltaTime;
 		float rawNewYPos = Mathf.Clamp (transform.localPosition.y + yOffset, -1.6f, 1.6f);
 		transform.localPosition = new Vector3 (rawNewXPos, rawNewYPos, transform.localPosition.z);
+	}
+
+	void OnPlayerDeath () // called by string
+	{
+		print("Controls dead");
+		isDead = true;
 	}
 }

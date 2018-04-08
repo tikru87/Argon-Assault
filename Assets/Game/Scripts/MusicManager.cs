@@ -6,9 +6,16 @@ using UnityEngine.SceneManagement;
 public class MusicManager : MonoBehaviour {
 
 	// Use this for initialization
-	private void Awake()
+	private void Awake ()
 	{
-		DontDestroyOnLoad(gameObject);
+		int numMusicPlayers = FindObjectsOfType<MusicManager>().Length;
+
+		if (numMusicPlayers > 1) {
+			Destroy (gameObject);
+		} else {
+			DontDestroyOnLoad(gameObject);
+		}
+
 	}
 	void Start () {
 		Invoke("LoadStartMenu", 2f);

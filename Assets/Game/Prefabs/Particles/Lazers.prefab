@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198427671957513740}
   - component: {fileID: 199607618379056814}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Lazers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
