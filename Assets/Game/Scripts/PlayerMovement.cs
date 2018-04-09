@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	[Header("General")]
 	[Tooltip("In ms^-1")][SerializeField] float Speed = 10f;
+	[SerializeField] GameObject[] lazers;
 	[Header("Screen-position Based")]
 	[SerializeField] float positionPitchFactor = -12f;
 	[SerializeField] float positionYawfactor = 12f;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (!isDead) {
 			HandleTranslation ();
 			HandleRotation ();
+			ProcessFire();
 		}
 	}
 
@@ -51,9 +53,28 @@ public class PlayerMovement : MonoBehaviour {
 		transform.localPosition = new Vector3 (rawNewXPos, rawNewYPos, transform.localPosition.z);
 	}
 
+	void ProcessFire ()
+	{
+		if (CrossPlatformInputManager.GetButton ("Fire")) {
+			SetGunActive(true);
+		} else 
+		{
+			SetGunActive(false);
+		}
+	}
+
+	void SetGunActive (bool isActive)
+	{
+		foreach (GameObject lazer in lazers) {
+			var emissionModule = lazer.GetComponent<ParticleSystem>().emission;
+			emissionModule.enabled = isActive;
+		}
+	}
+
 	void OnPlayerDeath () // called by string
 	{
 		print("Controls dead");
+		SetGunActive(false);
 		isDead = true;
 	}
 }

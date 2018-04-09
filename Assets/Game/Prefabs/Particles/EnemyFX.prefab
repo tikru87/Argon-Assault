@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4340755047867850}
   - component: {fileID: 198303676195254974}
   - component: {fileID: 199699618102172568}
+  - component: {fileID: 114322232100843284}
   m_Layer: 0
   m_Name: EnemyFX
   m_TagString: Untagged
@@ -107,6 +108,17 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114322232100843284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297297296437194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0683f117db4b6aa4faf1c5dee9bc7df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198303676195254974
 ParticleSystem:
   m_ObjectHideFlags: 1

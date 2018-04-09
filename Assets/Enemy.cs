@@ -9,11 +9,12 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] Transform parent;
 	[SerializeField] ScoreBoard scoreBoard;
 	[SerializeField] int scorePerHit = 12;
+	[SerializeField] int hits = 20;
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -21,9 +22,17 @@ public class Enemy : MonoBehaviour {
 
 	void OnParticleCollision (GameObject other)
 	{
+		hits--;
+		if (hits <= 0) {
+			KillEnemey ();
+		}
+	}
+
+	void KillEnemey ()
+	{
 		GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
 		fx.transform.parent = parent;
-		Destroy(gameObject);
-		scoreBoard.ScoreHit(scorePerHit);
+		Destroy (gameObject);
+		scoreBoard.ScoreHit (scorePerHit);
 	}
 }
